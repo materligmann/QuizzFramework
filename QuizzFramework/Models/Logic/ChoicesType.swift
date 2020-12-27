@@ -7,7 +7,18 @@
 
 import Foundation
 
-enum ChoicesType {
+enum ChoicesType: Equatable {
+    static func == (lhs: ChoicesType, rhs: ChoicesType) -> Bool {
+        switch (lhs, rhs) {
+        case (.single(_),.single(_)):
+            return true
+        case (.multiple(_),.multiple(_)):
+            return true
+        default:
+            return false
+        }
+    }
+    
     case single(SingleChoices)
     case multiple(MultipleChoices)
     
@@ -50,6 +61,15 @@ extension ChoicesType: Verifiable {
             return single.getRightness()
         case .multiple(let multiple):
             return multiple.getRightness()
+        }
+    }
+    
+    func computeRightness() {
+        switch self {
+        case .single(let single):
+            single.computeRightness()
+        case .multiple(let multiple):
+            multiple.computeRightness()
         }
     }
 }

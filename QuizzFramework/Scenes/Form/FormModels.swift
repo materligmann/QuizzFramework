@@ -61,6 +61,7 @@ enum FormModels {
         case state(StateEntry)
         case segment(SegmentEntry)
         case switcher(SwitcherEntry)
+        case result(ResultEntry)
     }
     
     // MARK: Basic
@@ -150,6 +151,16 @@ enum FormModels {
         let onSwitchAction: (Bool) -> Void
     }
     
+    // MARK: Result
+    
+    struct ResultEntry {
+        let placeholder: String
+        let image: BasicImage
+        let disclosure: Bool
+        let selected: Bool
+        let action: (() -> Void)?
+    }
+    
     // MARK: TableView View Model
     
     struct ViewModel {
@@ -193,6 +204,10 @@ enum FormModels {
                 return getSwitcherEntryCell(indexPath: indexPath,
                                             tableView: tableView,
                                             entry: switcherEntry)
+            case .result(let resultEntry):
+                return getResultEntryCell(indexPath: indexPath,
+                                          tableView: tableView,
+                                          entry: resultEntry)
             }
         }
         
@@ -205,6 +220,8 @@ enum FormModels {
             switch type {
             case .basic(let basicEntry):
                 basicEntry.action?()
+            case .result(let resultEntry):
+                resultEntry.action?()
             default:
                 break
             }
@@ -294,6 +311,17 @@ enum FormModels {
                                entry: SwitcherEntry) -> UITableViewCell {
             if let cell = tableView.dequeueReusableCell(
                 withIdentifier: SwitcherCell.cellIdentifier, for: indexPath) as? SwitcherCell {
+                cell.set(entry: entry)
+                return cell
+            }
+            return UITableViewCell()
+        }
+        
+        func getResultEntryCell(indexPath: IndexPath,
+                               tableView: UITableView,
+                               entry: ResultEntry) -> UITableViewCell {
+            if let cell = tableView.dequeueReusableCell(
+                withIdentifier: ResultCell.cellIdentifier, for: indexPath) as? ResultCell {
                 cell.set(entry: entry)
                 return cell
             }

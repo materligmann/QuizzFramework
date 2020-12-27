@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Rightness {
+struct Rightness: Equatable {
     let checks : [Check]
     let isRight: Bool
 }
 
-struct Check {
+struct Check: Equatable {
     let choice: Choice
     let isCorrect: Bool
     let selected: Bool

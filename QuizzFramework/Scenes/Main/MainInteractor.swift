@@ -21,7 +21,8 @@ class MainInteractor {
     func loadEthQuizz() {
         QuizzWorker.shared.getQuizzFromServer { quizz in
             if let quizz = quizz {
-                let request = QuestionsModels.Request(quizz: quizz)
+                QuizzWorker.shared.setCurrentQuizz(quizz: quizz)
+                let request = QuestionsModels.Request(mode: .question(quizz.getCurrentQuestion()))
                 self.presenter.presentQuestion(request: request)
             }
         }

@@ -7,13 +7,16 @@
 
 import Foundation
 
-class Question {
+struct Question: Equatable {
+    
     let statement: String
     let choices: Choices
+    let explanation: String?
     
-    init(statement: String, choices: Choices) {
+    init(statement: String, choices: Choices, explanation: String?) {
         self.statement = statement
         self.choices = choices
+        self.explanation = explanation
     }
     
     func getAggregatedShuffleChoice() -> [Choice] {
@@ -36,5 +39,9 @@ extension Question: Proceedable {
 extension Question: Verifiable {
     func getRightness() -> Rightness? {
         return choices.type.getRightness()
+    }
+    
+    func computeRightness() {
+        choices.type.computeRightness()
     }
 }

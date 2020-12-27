@@ -15,7 +15,9 @@ class SummaryViewController: UIViewController {
     
     private var summaryViewModel: FormModels.ViewModel?
     
-    private let interactor = SummaryInteractor()    
+    private let interactor = SummaryInteractor()
+    private let router = SummaryRouter()
+    
     // MARK: Lifecycle
 
     override func viewDidLoad() {
@@ -31,6 +33,7 @@ class SummaryViewController: UIViewController {
     // MARK: Setup
     
     private func setup() {
+        router.viewController = self
         interactor.presenter.viewController = self
         interactor.request = request
     }
@@ -57,6 +60,7 @@ class SummaryViewController: UIViewController {
         summaryTableView.register(SegmentedCell.self, forCellReuseIdentifier: SegmentedCell.cellIdentifier)
         summaryTableView.register(StateCell.self, forCellReuseIdentifier: StateCell.cellIdentifier)
         summaryTableView.register(SwitcherCell.self, forCellReuseIdentifier: SwitcherCell.cellIdentifier)
+        summaryTableView.register(ResultCell.self, forCellReuseIdentifier: ResultCell.cellIdentifier)
         summaryTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(summaryTableView)
         summaryTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
@@ -70,6 +74,12 @@ class SummaryViewController: UIViewController {
     func displaySummary(viewModel: FormModels.ViewModel) {
         summaryViewModel = viewModel
         summaryTableView.reloadData()
+    }
+    
+    // MARK: Navigate
+    
+    func navigateToCorrection(request: QuestionsModels.Request) {
+        router.routeToCorrection(request: request)
     }
 }
 

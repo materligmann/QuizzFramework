@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Quizz {
+class Quizz {
     private let questions: [Question]
     
     private var currentQuestionIndex: Int
@@ -22,20 +22,20 @@ struct Quizz {
     }
     
     func computeSummary() -> Summary {
-        var rightnesses = [Rightness]()
+        var corrections = [Correction]()
         var score = 0
         for question in questions {
             if let rightness = question.getRightness() {
                 if rightness.isRight {
                     score += 1
                 }
-                rightnesses.append(rightness)
+                corrections.append(Correction(question: question, rightness: rightness))
             }
         }
-        return Summary(score: score, numberOfQuestions: questions.count, rightnesses: rightnesses)
+        return Summary(score: score, corrections: corrections)
     }
     
-    mutating func loadNextQuestion() -> NextQuestionResult {
+    func loadNextQuestion() -> NextQuestionResult {
         if getCurrentQuestion().choices.type.canProceed() {
             if currentQuestionIndex != questions.count - 1 {
                 currentQuestionIndex += 1

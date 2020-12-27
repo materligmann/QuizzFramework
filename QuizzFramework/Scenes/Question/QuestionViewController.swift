@@ -60,6 +60,7 @@ class QuestionViewController: UIViewController {
         questionTableView.register(SegmentedCell.self, forCellReuseIdentifier: SegmentedCell.cellIdentifier)
         questionTableView.register(StateCell.self, forCellReuseIdentifier: StateCell.cellIdentifier)
         questionTableView.register(SwitcherCell.self, forCellReuseIdentifier: SwitcherCell.cellIdentifier)
+        questionTableView.register(ResultCell.self, forCellReuseIdentifier: ResultCell.cellIdentifier)
         questionTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(questionTableView)
         questionTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
@@ -111,14 +112,14 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section.questionSectionType() {
-        case .question:
+        case .first:
             break
         case .choices:
             if let choice = questionViewModel?.getSelectedChoice(at: indexPath) {
                 interactor.handleChoiceSelection(choice: choice, at: indexPath)
             }
-        case .next:
-            interactor.loadNextQuestion()
+        case .last:
+            interactor.onQuestionEnd()
         }
     }
 }

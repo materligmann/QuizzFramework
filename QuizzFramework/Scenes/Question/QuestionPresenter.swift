@@ -15,7 +15,11 @@ class QuestionPresenter {
     }
     
     func presentQuestion(question: Question) {
-        viewController?.displayQuestion(viewModel: QuestionsModels.QuestionViewModel(question: question))
+        viewController?.displayQuestion(viewModel:  QuestionsModels.QuestionViewModel(question: question, rightness: nil))
+    }
+    
+    func presentCorrection(question: Question, rightness: Rightness?) {
+        viewController?.displayQuestion(viewModel: QuestionsModels.QuestionViewModel(question: question, rightness: rightness))
     }
     
     func presentCleanedQuestion(toggledIndexPath: IndexPath) {

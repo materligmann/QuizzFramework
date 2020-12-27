@@ -7,10 +7,6 @@
 
 import Foundation
 
-class Choices {
-    let type: ChoicesType
-    
-    init(type: ChoicesType) {
-        self.type = type
-    }
+struct Choices: Equatable {
+    var type: ChoicesType
 }

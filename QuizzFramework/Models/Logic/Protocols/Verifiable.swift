@@ -9,4 +9,5 @@ import Foundation
 
 protocol Verifiable {
     func getRightness() -> Rightness?
+    func computeRightness()
 }

@@ -13,4 +13,8 @@ class SummaryPresenter {
     func presentSummary(sections: [FormModels.FormSection]) {
         viewController?.displaySummary(viewModel: FormModels.ViewModel(sections: sections))
     }
+    
+    func presentCorrection(request: QuestionsModels.Request) {
+        viewController?.navigateToCorrection(request: request)
+    }
 }

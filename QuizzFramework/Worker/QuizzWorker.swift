@@ -11,9 +11,18 @@ import Alamofire
 class QuizzWorker {
     
     static let shared = QuizzWorker()
+    private var currentQuizz: Quizz?
     
     private init() {}
     typealias JSON = [String: Any]
+    
+    func setCurrentQuizz(quizz: Quizz) {
+        currentQuizz = quizz
+    }
+    
+    func getCurrentQuizz() -> Quizz? {
+        return currentQuizz
+    }
     
     func getQuizzFromServer(completion: @escaping (Quizz?)-> Void) {
         let endPoint = "https://materligmann.github.io/quizz.json"
@@ -45,12 +54,20 @@ class QuizzWorker {
             for questionJson in questionsJSON {
                 guard let statement = decodeStatement(json: questionJson) else { return nil }
                 guard let choices = decodeChoices(question: questionJson) else { return nil }
-                let question = Question(statement: statement, choices: choices)
+                guard let explanation = decodeExplanation(question: questionJson) else { return nil }
+                let question = Question(statement: statement, choices: choices, explanation: explanation)
                 questions.append(question)
             }
             if !questions.isEmpty {
                 return questions
             }
+        }
+        return nil
+    }
+    
+    func decodeExplanation(question: JSON) -> String? {
+        if let explanation = question["explanation"] as? String {
+            return explanation
         }
         return nil
     }
@@ -174,7 +191,7 @@ class QuizzWorker {
                                                 ]
                                         )
                                     )
-                        )
+                        ), explanation: "Vitalik !"
             ),
             Question(statement: "Who created Bitcoin ?",
                      choices:
@@ -188,7 +205,7 @@ class QuizzWorker {
                                                 ]
                                         )
                                     )
-                        )
+                        ), explanation: "Satoshi Nakamoto"
             ),
             Question(statement: "Who created Microsoft ?",
                      choices:
@@ -202,7 +219,7 @@ class QuizzWorker {
                                                 ]
                                         )
                                     )
-                        )
+                        ), explanation: "Bill Gates !"
             ),
             Question(statement: "Who founded Apple ?",
                      choices:
@@ -220,7 +237,7 @@ class QuizzWorker {
                                             ]
                                         )
                                     )
-                        )
+                        ), explanation: "Steve Jobs and Steve Wozniak !"
             )
         ]
     }

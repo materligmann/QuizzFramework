@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F2A41EF25976729001E6909 /* ResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2A41EE25976729001E6909 /* ResultCell.swift */; };
+		5F2A41FB259799D9001E6909 /* SummaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2A41FA259799D9001E6909 /* SummaryRouter.swift */; };
 		5F916ACF25952885008E7FB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916ACE25952885008E7FB9 /* AppDelegate.swift */; };
 		5F916AD125952885008E7FB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916AD025952885008E7FB9 /* SceneDelegate.swift */; };
 		5F916AD825952887008E7FB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F916AD725952887008E7FB9 /* Assets.xcassets */; };
@@ -24,7 +26,6 @@
 		5F916B1D25952985008E7FB9 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916B0F25952985008E7FB9 /* TextCell.swift */; };
 		5F916B1E25952985008E7FB9 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916B1025952985008E7FB9 /* ButtonCell.swift */; };
 		5F916B1F25952985008E7FB9 /* SwitcherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916B1125952985008E7FB9 /* SwitcherCell.swift */; };
-		5F916B2025952985008E7FB9 /* FormTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916B1225952985008E7FB9 /* FormTextCell.swift */; };
 		5F916B33259529AD008E7FB9 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916B25259529AD008E7FB9 /* Font.swift */; };
 		5F916B34259529AD008E7FB9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916B26259529AD008E7FB9 /* Colors.swift */; };
 		5F916B35259529AD008E7FB9 /* Bundle+Internationalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916B29259529AD008E7FB9 /* Bundle+Internationalization.swift */; };
@@ -71,11 +72,14 @@
 		5F916BC525964F0E008E7FB9 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916BC425964F0E008E7FB9 /* MainPresenter.swift */; };
 		5F916BC82596502F008E7FB9 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916BC72596502F008E7FB9 /* MainRouter.swift */; };
 		5F916BCB25965142008E7FB9 /* MainWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F916BCA25965142008E7FB9 /* MainWorker.swift */; };
+		5FBBA04325984F3000603CDC /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBA04225984F3000603CDC /* QuestionCell.swift */; };
 		F71CCF346B896443BF41F633 /* Pods_QuizzFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC9478FD4BDA353CD8E4D79 /* Pods_QuizzFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2B96A656A4B470EF467574DD /* Pods-QuizzFramework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizzFramework.release.xcconfig"; path = "Target Support Files/Pods-QuizzFramework/Pods-QuizzFramework.release.xcconfig"; sourceTree = "<group>"; };
+		5F2A41EE25976729001E6909 /* ResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCell.swift; sourceTree = "<group>"; };
+		5F2A41FA259799D9001E6909 /* SummaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryRouter.swift; sourceTree = "<group>"; };
 		5F916ACB25952885008E7FB9 /* QuizzFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizzFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F916ACE25952885008E7FB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F916AD025952885008E7FB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +99,6 @@
 		5F916B0F25952985008E7FB9 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		5F916B1025952985008E7FB9 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		5F916B1125952985008E7FB9 /* SwitcherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitcherCell.swift; sourceTree = "<group>"; };
-		5F916B1225952985008E7FB9 /* FormTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextCell.swift; sourceTree = "<group>"; };
 		5F916B25259529AD008E7FB9 /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		5F916B26259529AD008E7FB9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5F916B29259529AD008E7FB9 /* Bundle+Internationalization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Internationalization.swift"; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 		5F916BC425964F0E008E7FB9 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		5F916BC72596502F008E7FB9 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		5F916BCA25965142008E7FB9 /* MainWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorker.swift; sourceTree = "<group>"; };
+		5FBBA04225984F3000603CDC /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		703792DE9F3435875A43A25C /* Pods-QuizzFramework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizzFramework.debug.xcconfig"; path = "Target Support Files/Pods-QuizzFramework/Pods-QuizzFramework.debug.xcconfig"; sourceTree = "<group>"; };
 		9CC9478FD4BDA353CD8E4D79 /* Pods_QuizzFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuizzFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -201,7 +205,6 @@
 				5F916B0625952985008E7FB9 /* FormInteractor.swift */,
 				5F916B0725952985008E7FB9 /* FormViewController.swift */,
 				5F916B0825952985008E7FB9 /* FormPresenter.swift */,
-				5F916B1225952985008E7FB9 /* FormTextCell.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				5F916B0F25952985008E7FB9 /* TextCell.swift */,
 				5F916B1025952985008E7FB9 /* ButtonCell.swift */,
 				5F916B1125952985008E7FB9 /* SwitcherCell.swift */,
+				5F2A41EE25976729001E6909 /* ResultCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -283,6 +287,7 @@
 		5F916B4825952A39008E7FB9 /* Question */ = {
 			isa = PBXGroup;
 			children = (
+				5FBBA04525984F5000603CDC /* Cell */,
 				5F916B4D25952A73008E7FB9 /* QuestionsModels.swift */,
 				5F916B4925952A72008E7FB9 /* QuestionViewController.swift */,
 				5F916B4C25952A73008E7FB9 /* QuestionInteractor.swift */,
@@ -348,6 +353,7 @@
 				5F916B97259596E2008E7FB9 /* SummaryPresenter.swift */,
 				5F916B9A259597AF008E7FB9 /* SummaryModels.swift */,
 				5F916B9D25959B90008E7FB9 /* SummaryWorker.swift */,
+				5F2A41FA259799D9001E6909 /* SummaryRouter.swift */,
 			);
 			path = Summary;
 			sourceTree = "<group>";
@@ -376,13 +382,20 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		5FBBA04525984F5000603CDC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5FBBA04225984F3000603CDC /* QuestionCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		8F90EB18012D5BCF25E59C62 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				703792DE9F3435875A43A25C /* Pods-QuizzFramework.debug.xcconfig */,
 				2B96A656A4B470EF467574DD /* Pods-QuizzFramework.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -512,6 +525,8 @@
 				5F916BBE25964E89008E7FB9 /* MainModels.swift in Sources */,
 				5F916B8025956D1D008E7FB9 /* ChoicesType.swift in Sources */,
 				5F916B6925952F52008E7FB9 /* Choices.swift in Sources */,
+				5FBBA04325984F3000603CDC /* QuestionCell.swift in Sources */,
+				5F2A41EF25976729001E6909 /* ResultCell.swift in Sources */,
 				5F916B8B2595861A008E7FB9 /* SingleChoices.swift in Sources */,
 				5F916B1625952985008E7FB9 /* FormViewController.swift in Sources */,
 				5F916BC82596502F008E7FB9 /* MainRouter.swift in Sources */,
@@ -556,7 +571,6 @@
 				5F916B37259529AD008E7FB9 /* UIViewController+Alert.swift in Sources */,
 				5F916BA125959CF8008E7FB9 /* Rightness.swift in Sources */,
 				5F916B36259529AD008E7FB9 /* String+UppercaseFirst.swift in Sources */,
-				5F916B2025952985008E7FB9 /* FormTextCell.swift in Sources */,
 				5F916BCB25965142008E7FB9 /* MainWorker.swift in Sources */,
 				5F916B33259529AD008E7FB9 /* Font.swift in Sources */,
 				5F916B1325952985008E7FB9 /* FormRouter.swift in Sources */,
@@ -565,6 +579,7 @@
 				5F916AD125952885008E7FB9 /* SceneDelegate.swift in Sources */,
 				5F916B3C259529AD008E7FB9 /* Notification+Name.swift in Sources */,
 				5F916BC525964F0E008E7FB9 /* MainPresenter.swift in Sources */,
+				5F2A41FB259799D9001E6909 /* SummaryRouter.swift in Sources */,
 				5F916B8525958330008E7FB9 /* NextQuestionResult.swift in Sources */,
 				5F916B95259596C9008E7FB9 /* SummaryInteractor.swift in Sources */,
 				5F916B6125952EB6008E7FB9 /* Quizz.swift in Sources */,
@@ -637,7 +652,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -692,7 +707,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -709,8 +724,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LYU7FAB9JV;
+				DEVELOPMENT_TEAM = BAJCWWQ6Q6;
 				INFOPLIST_FILE = QuizzFramework/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -729,8 +745,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LYU7FAB9JV;
+				DEVELOPMENT_TEAM = BAJCWWQ6Q6;
 				INFOPLIST_FILE = QuizzFramework/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

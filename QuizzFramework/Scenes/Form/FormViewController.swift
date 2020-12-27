@@ -67,6 +67,7 @@ class FormViewController: UIViewController {
         formTableView.register(SegmentedCell.self, forCellReuseIdentifier: SegmentedCell.cellIdentifier)
         formTableView.register(StateCell.self, forCellReuseIdentifier: StateCell.cellIdentifier)
         formTableView.register(SwitcherCell.self, forCellReuseIdentifier: SwitcherCell.cellIdentifier)
+        formTableView.register(ResultCell.self, forCellReuseIdentifier: ResultCell.cellIdentifier)
         formTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(formTableView)
         formTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true

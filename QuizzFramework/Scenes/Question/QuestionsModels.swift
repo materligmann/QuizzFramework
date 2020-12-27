@@ -9,52 +9,71 @@ import UIKit
 
 enum QuestionsModels {
     struct Request {
-        let quizz: Quizz
+        let mode: QuestionMode
+    }
+    
+    enum QuestionMode {
+        case question(Question)
+        case correction(Correction)
     }
     
     enum QuestionSectionType {
-        case question
+        case first
         case choices
-        case next
+        case last
     }
     
     struct QuestionViewModel {
         let question: Question
         let aggregateChoices: [Choice]
+        let rightness: Rightness?
         
-        init(question: Question) {
+        let multipleQuestionNumberOfSetcion = 3
+        let correctionNumberOfSection = 2
+        
+        init(question: Question, rightness: Rightness?) {
             self.question = question
             self.aggregateChoices = question.getAggregatedShuffleChoice()
+            self.rightness = rightness
         }
         
         func getNumberOfSection() -> Int {
-            switch question.choices.type {
-            case .single:
+            switch (question.choices.type, rightness) {
+            case (.multiple, nil):
+                return 3
+            case (.single, nil):
                 return 2
-            case .multiple:
+            default:
                 return 3
             }
         }
         
         func getNumberOfRows(in section: Int) -> Int {
             switch section.questionSectionType() {
-            case .question:
+            case .first:
                 return 1
             case .choices:
                 return aggregateChoices.count
-            case .next:
+            case .last:
                 return 1
             }
         }
         
         func getCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
             switch indexPath.section.questionSectionType() {
-            case .question:
+            case .first:
                 return getQuestionCell()
             case .choices:
-                return getAnswerCell(tableView: tableView, indexPath: indexPath)
-            case .next:
-                return getNextCell()
+                return getAnswerCell(tableView: tableView,
+                                     indexPath: indexPath)
+            case .last:
+                if rightness != nil {
+                    let cell = UITableViewCell()
+                    cell.textLabel?.text = question.explanation
+                    return cell
+                } else {
+                    return getNextCell()
+                }
             }
         }
         
@@ -65,14 +84,26 @@ enum QuestionsModels {
         }
         
         private func getAnswerCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: BasicCell.cellIdentifier, for: indexPath) as? BasicCell {
-                cell.textLabel?.text = aggregateChoices[indexPath.row].statement
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ResultCell.cellIdentifier, for: indexPath) as? ResultCell {
+                var image: FormModels.BasicImage?
+                if let rightness = rightness {
+                    let correct = rightness.checks[indexPath.row].isCorrect
+                    image = .system(correct ? "checkmark.circle" : "xmark.circle")
+                } else {
+                    image = FormModels.BasicImage.none
+                }
+                let choice = aggregateChoices[indexPath.row]
+                cell.set(entry: FormModels.ResultEntry(placeholder: choice.statement,
+                                                       image: image!,
+                                                       disclosure: false,
+                                                       selected: rightness?.checks[indexPath.row].selected ?? false,
+                                                       action: nil))
                 return cell
             }
             return UITableViewCell()
         }
         
-        func getNextCell() -> UITableViewCell {
+        private func getNextCell() -> UITableViewCell {
             let cell = UITableViewCell()
             cell.textLabel?.textAlignment = .center
             cell.contentView.backgroundColor = UIColor.fourthColor.withAlphaComponent(0.8)
@@ -107,9 +138,9 @@ extension Int {
         if self == 1 {
             return .choices
         } else if self == 2 {
-            return .next
+            return .last
         } else {
-            return .question
+            return .first
         }
     }
 }
