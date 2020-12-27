@@ -119,7 +119,7 @@ extension QuestionViewController: UITableViewDelegate, UITableViewDataSource {
                 interactor.handleChoiceSelection(choice: choice, at: indexPath)
             }
         case .last:
-            interactor.onQuestionEnd()
+            questionViewModel?.onLastSelection(endAction: interactor.onQuestionEnd)
         }
     }
 }

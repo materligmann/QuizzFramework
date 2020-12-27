@@ -63,5 +63,4 @@ class BasicCell: UITableViewCell {
             accessoryType = .checkmark
         }
     }
-    
 }

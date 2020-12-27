@@ -77,6 +77,12 @@ enum QuestionsModels {
             }
         }
         
+        func onLastSelection(endAction: () -> Void) {
+            if rightness == nil {
+                endAction()
+            }
+        }
+        
         private func getQuestionCell() -> UITableViewCell {
             let cell = UITableViewCell()
             cell.textLabel?.text = question.statement
@@ -113,14 +119,14 @@ enum QuestionsModels {
         }
         
         func toggledChoice(at indexPath: IndexPath, tableView: UITableView) {
-            if let cell = tableView.cellForRow(at: indexPath) as? BasicCell {
+            if let cell = tableView.cellForRow(at: indexPath) as? ResultCell {
                 cell.toggleSelection()
             }
         }
         
         func cleanChoices(for toggledIndexPath: IndexPath, tableView: UITableView) {
             for (i, _) in aggregateChoices.enumerated() {
-                if let cell = tableView.cellForRow(at: IndexPath(row: i, section: 1)) as? BasicCell,
+                if let cell = tableView.cellForRow(at: IndexPath(row: i, section: 1)) as? ResultCell,
                    i != toggledIndexPath.row {
                     cell.removeSelection()
                 }

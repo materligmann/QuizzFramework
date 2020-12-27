@@ -70,4 +70,18 @@ class ResultCell: UITableViewCell {
         iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor, constant: 0).isActive = true
         iconImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16).isActive = true
     }
+    
+    // MARK: Process
+    
+    func removeSelection() {
+        accessoryType = .none
+    }
+    
+    func toggleSelection() {
+        if accessoryType == .checkmark {
+            accessoryType = .none
+        } else {
+            accessoryType = .checkmark
+        }
+    }
 }

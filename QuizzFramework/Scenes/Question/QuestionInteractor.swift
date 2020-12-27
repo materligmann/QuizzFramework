@@ -39,7 +39,12 @@ class QuestionInteractor {
             case .question(let question):
                 question.select(choice: choice)
                 loadSelectionChanges(question: question, at: indexPath)
-                onQuestionEnd()
+                switch question.choices.type {
+                case .multiple:
+                    break
+                case .single:
+                    onQuestionEnd()
+                }
             }
         }
     }
@@ -55,11 +60,19 @@ class QuestionInteractor {
     }
     
     func onQuestionEnd() {
-        loadNextQuestion()
+        if let question = question {
+            switch question.choices.type {
+            case .multiple:
+                computeRightnessForMultipleChoices()
+                
+            case .single:
+                break
+            }
+            loadNextQuestion()
+        }
     }
     
     private func loadNextQuestion() {
-        computeRightnessForMultipleChoices()
         if let quizz = QuizzWorker.shared.getCurrentQuizz() {
             switch quizz.loadNextQuestion() {
             case .yes:
