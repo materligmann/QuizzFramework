@@ -10,6 +10,8 @@ import UIKit
 enum QuestionsModels {
     struct Request {
         let mode: QuestionMode
+        let title: String
+        let isSkippable: Bool
     }
     
     enum QuestionMode {
@@ -31,10 +33,27 @@ enum QuestionsModels {
         let multipleQuestionNumberOfSetcion = 3
         let correctionNumberOfSection = 2
         
+        static let basicRowHeight: CGFloat = 50
+        
         init(question: Question, rightness: Rightness?) {
             self.question = question
             self.aggregateChoices = question.getAggregatedShuffleChoice()
             self.rightness = rightness
+        }
+        
+        func getRowHeight(for tableView: UITableView, at indexPath: IndexPath) -> CGFloat {
+            switch indexPath.section.questionSectionType() {
+            case .first:
+                return Self.basicRowHeight
+            case .choices:
+                return Self.basicRowHeight
+            case .last:
+                if rightness != nil {
+                    return UITableView.automaticDimension
+                } else {
+                    return Self.basicRowHeight
+                }
+            }
         }
         
         func getNumberOfSection() -> Int {
@@ -42,7 +61,7 @@ enum QuestionsModels {
             case (.multiple, nil):
                 return 3
             case (.single, nil):
-                return 2
+                return 3
             default:
                 return 3
             }
@@ -70,6 +89,7 @@ enum QuestionsModels {
                 if rightness != nil {
                     let cell = UITableViewCell()
                     cell.textLabel?.text = question.explanation
+                    cell.textLabel?.numberOfLines = 0
                     return cell
                 } else {
                     return getNextCell()

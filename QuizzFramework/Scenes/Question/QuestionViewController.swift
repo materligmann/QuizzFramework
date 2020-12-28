@@ -24,7 +24,6 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         setup()
         configureBackground()
-        configureTitle()
         configureQuestionTableView()
         
         interactor.loadQuestion()
@@ -44,14 +43,10 @@ class QuestionViewController: UIViewController {
         view.backgroundColor = .primaryColor
     }
     
-    private func configureTitle() {
-        title = "Quizz"
-    }
-    
     private func configureQuestionTableView() {
         questionTableView.delegate = self
         questionTableView.dataSource = self
-        questionTableView.rowHeight = 50
+        questionTableView.rowHeight = UITableView.automaticDimension
         questionTableView.register(BasicCell.self, forCellReuseIdentifier: BasicCell.cellIdentifier)
         questionTableView.register(TextCell.self, forCellReuseIdentifier: TextCell.cellIdentifier)
         questionTableView.register(TextInputCell.self, forCellReuseIdentifier: TextInputCell.cellIdentifier)
@@ -81,6 +76,10 @@ class QuestionViewController: UIViewController {
     
     // MARK: Display
     
+    func displayTitle(title: String) {
+        self.title = title
+    }
+    
     func displayQuestion(viewModel: QuestionsModels.QuestionViewModel) {
         questionViewModel = viewModel
         questionTableView.reloadData()
@@ -96,6 +95,11 @@ class QuestionViewController: UIViewController {
 }
 
 extension QuestionViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return questionViewModel?.getRowHeight(for: tableView, at: indexPath)
+            ?? QuestionsModels.QuestionViewModel.basicRowHeight
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return questionViewModel?.getNumberOfSection() ?? 0

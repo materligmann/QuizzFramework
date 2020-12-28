@@ -13,7 +13,7 @@ class MultipleChoices {
     let aggregatedShuffledChoices: [Choice]
     
     private var answers: [Choice]?
-    private var rightness: Rightness?
+    private var rightness: Rightness!
     
     init(correctChoices: [Choice], incorrectChoices: [Choice]) {
         self.correctChoices = correctChoices
@@ -63,7 +63,7 @@ extension MultipleChoices: Proceedable {
 }
 
 extension MultipleChoices: Verifiable {
-    func getRightness() -> Rightness? {
+    func getRightness() -> Rightness {
         return rightness
     }
 }

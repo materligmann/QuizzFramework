@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
     }
     
     private func configureTitle() {
-        title = "Main"
+        title = "Knowledge Proof"
     }
     
     private func configureSummaryTableView() {

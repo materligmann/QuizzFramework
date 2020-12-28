@@ -17,6 +17,10 @@ class Quizz {
         self.questions = questions
     }
     
+    func getCurrentQuestionIndex() -> Int {
+        return currentQuestionIndex
+    }
+    
     func getCurrentQuestion() -> Question {
         return questions[currentQuestionIndex]
     }
@@ -25,24 +29,34 @@ class Quizz {
         var corrections = [Correction]()
         var score = 0
         for question in questions {
-            if let rightness = question.getRightness() {
-                if rightness.isRight {
-                    score += 1
-                }
-                corrections.append(Correction(question: question, rightness: rightness))
+            let rightness = question.getRightness()
+            if rightness.isRight {
+                score += 1
             }
+            corrections.append(Correction(question: question, rightness: rightness))
         }
         return Summary(score: score, corrections: corrections)
     }
     
-    func loadNextQuestion() -> NextQuestionResult {
+    func loadNextQuestion(isSkippingAllowed: Bool) -> NextQuestionResult {
         if getCurrentQuestion().choices.type.canProceed() {
-            if currentQuestionIndex != questions.count - 1 {
-                currentQuestionIndex += 1
+            if lastQuestion() {
+                moveToNextQuestion()
                 return .yes
             }
             return .end
         }
+        if isSkippingAllowed && lastQuestion() {
+            moveToNextQuestion()
+        }
         return .notAnswered
+    }
+    
+    private func moveToNextQuestion() {
+        currentQuestionIndex += 1
+    }
+    
+    private func lastQuestion() -> Bool {
+        return currentQuestionIndex != questions.count - 1
     }
 }

@@ -13,7 +13,7 @@ class SingleChoices {
     let aggregatedShuffledChoices: [Choice]
     
     private var answer: Choice?
-    private var rightness: Rightness?
+    private var rightness: Rightness
     
     init(correctChoice: Choice, incorrectChoices: [Choice]) {
         self.correctChoice = correctChoice
@@ -21,6 +21,11 @@ class SingleChoices {
         var choices = incorrectChoices
         choices.append(correctChoice)
         self.aggregatedShuffledChoices = choices.shuffled()
+        var checks = [Check]()
+        for choice in aggregatedShuffledChoices {
+            checks.append(Check(choice: choice, isCorrect: false, selected: false))
+        }
+        rightness = Rightness(checks: checks, isRight: false)
     }
     
     func setAnswer(choice: Choice) {
@@ -60,7 +65,7 @@ extension SingleChoices: Proceedable {
 }
 
 extension SingleChoices: Verifiable {
-    func getRightness() -> Rightness? {
+    func getRightness() -> Rightness {
         return rightness
     }
 }

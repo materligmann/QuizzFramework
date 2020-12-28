@@ -22,8 +22,13 @@ class MainInteractor {
         QuizzWorker.shared.getQuizzFromServer { quizz in
             if let quizz = quizz {
                 QuizzWorker.shared.setCurrentQuizz(quizz: quizz)
-                let request = QuestionsModels.Request(mode: .question(quizz.getCurrentQuestion()))
-                self.presenter.presentQuestion(request: request)
+                let question = quizz.getCurrentQuestion()
+                let number = quizz.getCurrentQuestionIndex() + 1
+                self.presenter.presentQuestion(request:
+                                                QuestionsModels.Request(
+                                                    mode: .question(question),
+                                                    title: "Question \(number)",
+                                                    isSkippable: true))
             }
         }
     }

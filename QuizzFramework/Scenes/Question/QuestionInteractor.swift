@@ -17,8 +17,8 @@ class QuestionInteractor {
     private let worker = QuestionWorker()
     
     func loadQuestion() {
-        if let mode = request?.mode {
-            switch mode {
+        if let request = request {
+            switch request.mode {
             case .correction(let correction):
                 self.correction = correction
                 self.question = correction.question
@@ -27,7 +27,7 @@ class QuestionInteractor {
                 self.question = question
                 presenter.presentQuestion(question: question)
             }
-            
+            presenter.presentTitle(title: request.title)
         }
     }
     
@@ -64,7 +64,6 @@ class QuestionInteractor {
             switch question.choices.type {
             case .multiple:
                 computeRightnessForMultipleChoices()
-                
             case .single:
                 break
             }
@@ -73,14 +72,24 @@ class QuestionInteractor {
     }
     
     private func loadNextQuestion() {
-        if let quizz = QuizzWorker.shared.getCurrentQuizz() {
-            switch quizz.loadNextQuestion() {
+        if let quizz = QuizzWorker.shared.getCurrentQuizz(), let isSkippable = request?.isSkippable {
+            switch quizz.loadNextQuestion(isSkippingAllowed: isSkippable) {
             case .yes:
-                presenter.presentNextQuestion(request: QuestionsModels.Request(mode: .question(quizz.getCurrentQuestion())))
+                let question = quizz.getCurrentQuestion()
+                let number = quizz.getCurrentQuestionIndex() + 1
+                presenter.presentNextQuestion(request: QuestionsModels.Request(
+                                                mode: .question(question),
+                                                title: "Question \(number)",
+                                                isSkippable: true))
             case .end:
                 presenter.presentSummary(request: SummaryModels.Request(quizz: quizz))
             case .notAnswered:
-                break //TODO: Implement
+                let question = quizz.getCurrentQuestion()
+                let number = quizz.getCurrentQuestionIndex() + 1
+                presenter.presentNextQuestion(request: QuestionsModels.Request(
+                                                mode: .question(question),
+                                                title: "Question \(number)",
+                                                isSkippable: true))
             }
         }
     }

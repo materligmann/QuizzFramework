@@ -37,7 +37,7 @@ extension Question: Proceedable {
 }
 
 extension Question: Verifiable {
-    func getRightness() -> Rightness? {
+    func getRightness() -> Rightness {
         return choices.type.getRightness()
     }
     

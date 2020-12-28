@@ -15,14 +15,16 @@ class SummaryInteractor {
     private let worker = SummaryWorker()
     
     func loadSummary() {
-        if let quizz = request?.quizz {
-            presenter.presentSummary(sections: worker.getSummarySections(quizz: quizz,
-                                                                         onQuestionDetailRequest: loadQuestionDetail))
+        if let request = request {
+            presenter.presentSummary(sections:
+                                        worker.getSummarySections(
+                                            quizz: request.quizz,
+                                            onQuestionDetailRequest: loadQuestionDetail))
         }
     }
     
-    func loadQuestionDetail(correction: Correction) {
-        let request = QuestionsModels.Request(mode: .correction(correction))
+    func loadQuestionDetail(correction: Correction, title: String) {
+        let request = QuestionsModels.Request(mode: .correction(correction), title: title, isSkippable: false)
         presenter.presentCorrection(request: request)
     }
 }

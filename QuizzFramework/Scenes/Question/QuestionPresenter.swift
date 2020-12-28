@@ -22,6 +22,10 @@ class QuestionPresenter {
         viewController?.displayQuestion(viewModel: QuestionsModels.QuestionViewModel(question: question, rightness: rightness))
     }
     
+    func presentTitle(title: String) {
+        viewController?.displayTitle(title: title)
+    }
+    
     func presentCleanedQuestion(toggledIndexPath: IndexPath) {
         viewController?.displayCleanedQuestion(toggledIndexPath: toggledIndexPath)
     }

@@ -9,7 +9,9 @@ import Foundation
 
 class SummaryWorker {
     
-    func getSummarySections(quizz: Quizz, onQuestionDetailRequest: @escaping (Correction) -> Void) -> [FormModels.FormSection] {
+    func getSummarySections(quizz: Quizz,
+                            onQuestionDetailRequest:
+                                @escaping (Correction, String) -> Void) -> [FormModels.FormSection] {
         let summary = quizz.computeSummary()
         let scoreString = "\(summary.score) / \(summary.corrections.count)"
         return [
@@ -17,15 +19,16 @@ class SummaryWorker {
                 FormModels.FormEntry(entryType:
                                         .text(FormModels.TextEntry(placeholder: "Score", value: scoreString)))
             ]),
-            rightnessSection(corrections: summary.corrections, action: onQuestionDetailRequest)
+            rightnessSection(corrections: summary.corrections,
+                             action: onQuestionDetailRequest)
         ]
     }
     
-    func rightnessSection(corrections: [Correction], action: @escaping (_ correction: Correction) -> Void ) -> FormModels.FormSection {
+    func rightnessSection(corrections: [Correction], action: @escaping (_ correction: Correction, String) -> Void ) -> FormModels.FormSection {
         var entries = [FormModels.FormEntry]()
         for (i, correction) in corrections.enumerated() {
             let imageName = correction.rightness.isRight ? "checkmark.circle" : "xmark.circle"
-            let cellAction = { action(correction) }
+            let cellAction = { action(correction, "Question \(i + 1)") }
             let entry = FormModels.FormEntry(entryType:
                                                 .result(FormModels.ResultEntry(
                                                             placeholder: "Question \(i + 1)",

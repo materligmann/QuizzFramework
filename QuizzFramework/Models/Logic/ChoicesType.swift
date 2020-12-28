@@ -55,7 +55,7 @@ extension ChoicesType: Answerable {
 }
 
 extension ChoicesType: Verifiable {
-    func getRightness() -> Rightness? {
+    func getRightness() -> Rightness {
         switch self {
         case .single(let single):
             return single.getRightness()
