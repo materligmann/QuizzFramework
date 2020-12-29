@@ -9,6 +9,6 @@ import Foundation
 
 enum SummaryModels {
     struct Request {
-        let quizz: Quizz
+        let quizz: Quiz
     }
 }

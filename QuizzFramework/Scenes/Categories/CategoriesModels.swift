@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MainModels {
+enum CategoriesModels {
     struct Request {
     }
 }

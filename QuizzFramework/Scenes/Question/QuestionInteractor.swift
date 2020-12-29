@@ -72,7 +72,7 @@ class QuestionInteractor {
     }
     
     private func loadNextQuestion() {
-        if let quizz = QuizzWorker.shared.getCurrentQuizz(), let isSkippable = request?.isSkippable {
+        if let quizz = QuizzWorker.shared.getCurrentQuiz(), let isSkippable = request?.isSkippable {
             switch quizz.loadNextQuestion(isSkippingAllowed: isSkippable) {
             case .yes:
                 let question = quizz.getCurrentQuestion()

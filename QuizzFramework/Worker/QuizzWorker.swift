@@ -11,39 +11,89 @@ import Alamofire
 class QuizzWorker {
     
     static let shared = QuizzWorker()
-    private var currentQuizz: Quizz?
+    private var currentQuizz: Quiz?
     
     private init() {}
     typealias JSON = [String: Any]
     
-    func setCurrentQuizz(quizz: Quizz) {
-        currentQuizz = quizz
+    func setCurrentQuizz(quiz: Quiz) {
+        currentQuizz = quiz
     }
     
-    func getCurrentQuizz() -> Quizz? {
+    func getCurrentQuiz() -> Quiz? {
         return currentQuizz
     }
     
-    func getQuizzFromServer(completion: @escaping (Quizz?)-> Void) {
-        let endPoint = "https://materligmann.github.io/quizz.json"
+    func fetchQuiz(path: String, id: Int, completion: @escaping (Result<Quiz, Error>)-> Void) {
+        let endPoint = "https://morning-caverns-85390.herokuapp.com/\(path)/\(id)"
         AF.request(endPoint, method: .get).responseJSON { response in
             switch response.result {
             case .success(let value):
                 if let json = value as? JSON {
-                    guard let quizz = self.decodeQuizz(json: json) else { return }
-                    completion(quizz)
+                    guard let quiz = self.decodeQuizz(json: json) else { return }
+                    completion(.success(quiz))
                 }
-            case .failure:
-                completion(nil)
+            case .failure(let error as Error):
+                completion(.failure(error))
             }
         }
     }
     
-    func decodeQuizz(json: JSON) -> Quizz? {
+    func getCategoriesFromServer(completion: @escaping ([Category]?)-> Void) {
+        let endPoint = "https://morning-caverns-85390.herokuapp.com/categories"
+//        AF.request(endPoint, method: .get).responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                if let json = value as? JSON {
+//                    guard let quizz = self.decodeQuizz(json: json) else { return }
+//                    completion(quizz)
+//                }
+//            case .failure:
+//                completion(nil)
+//            }
+//        }
+        
+        AF.request(endPoint, method: .get).responseJSON(completionHandler: { response in
+            switch response.result {
+            case .success(let value):
+                if let json = value as? JSON {
+                    guard let categories = self.decodeCategories(json: json) else { return }
+                    completion(categories)
+                }
+            case .failure:
+                completion(nil)
+            }
+        })
+    }
+    
+    func decodeCategories(json: JSON) -> [Category]? {
+        if let categoriesJsonArray = json["categories"] as? [JSON] {
+            var categories = [Category]()
+            for categoryJson in categoriesJsonArray {
+                guard let name = categoryJson["name"] as? String else { return nil }
+                guard let title = categoryJson["title"] as? String else { return nil }
+                guard let imageName = categoryJson["imageName"] as? String else { return nil }
+                guard let quizesJson = categoryJson["quizes"] as? [JSON] else { return nil }
+                var quizes = [QuizRef]()
+                for quiz in quizesJson {
+                    guard let quizname = quiz["name"] as? String else { return nil }
+                    guard let id = quiz["id"] as? Int else { return nil }
+                    guard let imageName = quiz["imageName"] as? String else { return nil }
+                    let quizeRef = QuizRef(name: quizname, id: id, imageName: imageName)
+                    quizes.append(quizeRef)
+                }
+                categories.append(Category(name: name, title: title, imageName: imageName, quizes: quizes))
+            }
+            return categories
+        }
+        return nil
+    }
+    
+    func decodeQuizz(json: JSON) -> Quiz? {
         print(json)
         if let quizz = json["quizz"] as? JSON {
             guard let questions = decodeQuestions(quizz: quizz) else { return nil }
-            return Quizz(questions: questions)
+            return Quiz(questions: questions)
         }
         return nil
     }
@@ -143,41 +193,12 @@ class QuizzWorker {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    func getQuizz() -> Quizz {
+    func getQuizStub() -> Quiz {
         let questions = getQuizzQuestions()
-        return Quizz(questions: questions)
+        return Quiz(questions: questions)
     }
     
-    func getQuizzQuestions() -> [Question] {
+    private func getQuizzQuestions() -> [Question] {
         return [
             Question(statement: "Who created Ethereum ?",
                      choices:

@@ -9,7 +9,7 @@ import Foundation
 
 class SummaryWorker {
     
-    func getSummarySections(quizz: Quizz,
+    func getSummarySections(quizz: Quiz,
                             onQuestionDetailRequest:
                                 @escaping (Correction, String) -> Void) -> [FormModels.FormSection] {
         let summary = quizz.computeSummary()

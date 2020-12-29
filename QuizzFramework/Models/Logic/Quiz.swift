@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Quizz {
+class Quiz {
     private let questions: [Question]
     
     private var currentQuestionIndex: Int

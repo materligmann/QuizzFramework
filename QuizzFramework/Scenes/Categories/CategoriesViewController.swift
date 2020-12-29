@@ -7,16 +7,16 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class CategoriesViewController: UIViewController {
     
     private let mainTableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    var request: MainModels.Request?
+    var request: CategoriesModels.Request?
     
     private var mainViewModel: FormModels.ViewModel?
     
-    private let interactor = MainInteractor()
-    private let router = MainRouter()
+    private let interactor = CategoriesInteractor()
+    private let router = CategoriesRouter()
     
     // MARK: Lifecycle
     
@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
         configureTitle()
         configureSummaryTableView()
         
-        interactor.loadQuizzes()
+        interactor.loadCategories()
     }
     
     // MARK: Setup
@@ -70,19 +70,19 @@ class MainViewController: UIViewController {
     
     // MARK: Navigate
     
-    func navigateToQuestion(request: QuestionsModels.Request) {
-        router.routeToQuestion(request: request)
+    func navigateToQuizzes(request: QuizzesModels.Request) {
+        router.routeToQuizzes(request: request)
     }
     
     // MARK: Display
     
-    func displayQuizzes(viewModel: FormModels.ViewModel) {
+    func displayCategories(viewModel: FormModels.ViewModel) {
         mainViewModel = viewModel
         mainTableView.reloadData()
     }
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return mainViewModel?.sections.count ?? 0
     }
