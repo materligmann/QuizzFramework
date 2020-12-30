@@ -30,6 +30,8 @@ enum QuestionsModels {
         let aggregateChoices: [Choice]
         let rightness: Rightness?
         
+        var disabledCellSelection = false
+        
         let multipleQuestionNumberOfSetcion = 3
         let correctionNumberOfSection = 2
         
@@ -97,7 +99,7 @@ enum QuestionsModels {
             }
         }
         
-        func onLastSelection(endAction: () -> Void) {
+        mutating func onLastSelection(endAction: () -> Void) {
             if rightness == nil {
                 endAction()
             }

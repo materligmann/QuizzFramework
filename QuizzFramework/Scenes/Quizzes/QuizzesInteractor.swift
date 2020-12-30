@@ -42,7 +42,7 @@ class QuizzesInteractor {
             let title = "Question \(quiz.getCurrentQuestionIndex() + 1)"
             let request = QuestionsModels.Request(mode: .question(question),
                                                   title: title,
-                                                  isSkippable: true)
+                                                  isSkippable: quiz.isQuestionSkippable())
             presenter.presentQuestion(request: request)
         }
     }

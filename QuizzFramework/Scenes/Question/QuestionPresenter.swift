@@ -37,4 +37,8 @@ class QuestionPresenter {
     func presentNextQuestion(request: QuestionsModels.Request) {
         viewController?.navigateToNextQuestion(request: request)
     }
+    
+    func presentMessage(message: Message) {
+        viewController?.displayMessage(message: message)
+    }
 }

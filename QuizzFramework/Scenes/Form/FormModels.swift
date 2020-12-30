@@ -215,7 +215,7 @@ enum FormModels {
             return sections[section].title
         }
         
-        func onCellSelection(at indexPath: IndexPath) {
+        mutating func onCellSelection(at indexPath: IndexPath) {
             let type = sections[indexPath.section].entries[indexPath.row].entryType
             switch type {
             case .basic(let basicEntry):

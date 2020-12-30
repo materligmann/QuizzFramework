@@ -67,31 +67,36 @@ class QuestionInteractor {
             case .single:
                 break
             }
-            loadNextQuestion()
+            checkForNextQuestion()
         }
     }
     
-    private func loadNextQuestion() {
-        if let quizz = QuizzWorker.shared.getCurrentQuiz(), let isSkippable = request?.isSkippable {
-            switch quizz.loadNextQuestion(isSkippingAllowed: isSkippable) {
+    private func checkForNextQuestion() {
+        if let quiz = QuizzWorker.shared.getCurrentQuiz(), let isSkippable = request?.isSkippable {
+            switch quiz.loadNextQuestion(isSkippingAllowed: isSkippable) {
             case .yes:
-                let question = quizz.getCurrentQuestion()
-                let number = quizz.getCurrentQuestionIndex() + 1
-                presenter.presentNextQuestion(request: QuestionsModels.Request(
-                                                mode: .question(question),
-                                                title: "Question \(number)",
-                                                isSkippable: true))
+                loadNextQuestion(quiz: quiz)
             case .end:
-                presenter.presentSummary(request: SummaryModels.Request(quizz: quizz))
+                presenter.presentSummary(request: SummaryModels.Request(quizz: quiz))
             case .notAnswered:
-                let question = quizz.getCurrentQuestion()
-                let number = quizz.getCurrentQuestionIndex() + 1
-                presenter.presentNextQuestion(request: QuestionsModels.Request(
-                                                mode: .question(question),
-                                                title: "Question \(number)",
-                                                isSkippable: true))
+                if isSkippable {
+                    loadNextQuestion(quiz: quiz)
+                } else {
+                    let message = Message(title: "Not Answered",
+                                          body: "Question must be answered because this question is not skippable", onCompletion: nil, actions: nil)
+                    presenter.presentMessage(message: message)
+                }
             }
         }
+    }
+    
+    private func loadNextQuestion(quiz: Quiz) {
+        let question = quiz.getCurrentQuestion()
+        let number = quiz.getCurrentQuestionIndex() + 1
+        let request = QuestionsModels.Request(mode: .question(question),
+                                              title: "Question \(number)",
+                                              isSkippable: quiz.isQuestionSkippable())
+        presenter.presentNextQuestion(request: request)
     }
     
     private func computeRightnessForMultipleChoices() {

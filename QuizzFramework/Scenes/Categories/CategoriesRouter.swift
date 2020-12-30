@@ -13,7 +13,9 @@ class CategoriesRouter {
     func routeToQuizzes(request: QuizzesModels.Request) {
         let quizzesViewController = QuizzesViewController()
         quizzesViewController.request = request
-        viewController?.navigationController?.pushViewController(quizzesViewController,
-                                                                 animated: true)
+        if viewController?.navigationController?.viewControllers.last == viewController {
+            viewController?.navigationController?.pushViewController(quizzesViewController,
+                                                                     animated: true)
+        }
     }
 }

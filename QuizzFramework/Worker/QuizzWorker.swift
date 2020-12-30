@@ -93,7 +93,7 @@ class QuizzWorker {
         print(json)
         if let quizz = json["quizz"] as? JSON {
             guard let questions = decodeQuestions(quizz: quizz) else { return nil }
-            return Quiz(questions: questions)
+            return Quiz(questions: questions, areQuestionSkipable: Settings.areQuestionsSkippable)
         }
         return nil
     }
@@ -195,7 +195,7 @@ class QuizzWorker {
     
     func getQuizStub() -> Quiz {
         let questions = getQuizzQuestions()
-        return Quiz(questions: questions)
+        return Quiz(questions: questions, areQuestionSkipable: Settings.areQuestionsSkippable)
     }
     
     private func getQuizzQuestions() -> [Question] {

@@ -80,6 +80,7 @@
 		5FB53998259B4F2300EDE27F /* QuizzesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB53997259B4F2300EDE27F /* QuizzesRouter.swift */; };
 		5FB5399B259B4F5400EDE27F /* QuizzesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB5399A259B4F5400EDE27F /* QuizzesPresenter.swift */; };
 		5FB5399E259B526E00EDE27F /* QuizzesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB5399D259B526E00EDE27F /* QuizzesWorker.swift */; };
+		5FB539A4259CD28800EDE27F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB539A3259CD28800EDE27F /* Settings.swift */; };
 		5FBBA04325984F3000603CDC /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBBA04225984F3000603CDC /* QuestionCell.swift */; };
 		F71CCF346B896443BF41F633 /* Pods_QuizzFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CC9478FD4BDA353CD8E4D79 /* Pods_QuizzFramework.framework */; };
 /* End PBXBuildFile section */
@@ -161,6 +162,7 @@
 		5FB53997259B4F2300EDE27F /* QuizzesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesRouter.swift; sourceTree = "<group>"; };
 		5FB5399A259B4F5400EDE27F /* QuizzesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesPresenter.swift; sourceTree = "<group>"; };
 		5FB5399D259B526E00EDE27F /* QuizzesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesWorker.swift; sourceTree = "<group>"; };
+		5FB539A3259CD28800EDE27F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		5FBBA04225984F3000603CDC /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		703792DE9F3435875A43A25C /* Pods-QuizzFramework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizzFramework.debug.xcconfig"; path = "Target Support Files/Pods-QuizzFramework/Pods-QuizzFramework.debug.xcconfig"; sourceTree = "<group>"; };
 		9CC9478FD4BDA353CD8E4D79 /* Pods_QuizzFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuizzFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -360,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				5F916B7B259566F2008E7FB9 /* QuizzWorker.swift */,
+				5FB539A3259CD28800EDE27F /* Settings.swift */,
 			);
 			path = Worker;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				5F916BA42595A969008E7FB9 /* Choice.swift in Sources */,
 				5F916B88259585FE008E7FB9 /* MultipleChoices.swift in Sources */,
 				5F916B1A25952985008E7FB9 /* StateCell.swift in Sources */,
+				5FB539A4259CD28800EDE27F /* Settings.swift in Sources */,
 				5F916BAE2595AA04008E7FB9 /* Answerable.swift in Sources */,
 				5F916B45259529F6008E7FB9 /* LanguageManager.swift in Sources */,
 				5F916B4F25952A73008E7FB9 /* QuestionViewController.swift in Sources */,
@@ -764,7 +768,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = BAJCWWQ6Q6;
 				INFOPLIST_FILE = QuizzFramework/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -786,7 +790,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = BAJCWWQ6Q6;
 				INFOPLIST_FILE = QuizzFramework/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

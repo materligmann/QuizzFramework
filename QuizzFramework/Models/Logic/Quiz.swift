@@ -9,10 +9,11 @@ import Foundation
 
 class Quiz {
     private let questions: [Question]
-    
+    private let areQuestionSkipable: Bool
     private var currentQuestionIndex: Int
     
-    init(questions: [Question]) {
+    init(questions: [Question], areQuestionSkipable: Bool) {
+        self.areQuestionSkipable = areQuestionSkipable
         currentQuestionIndex = 0
         self.questions = questions
     }
@@ -23,6 +24,10 @@ class Quiz {
     
     func getCurrentQuestion() -> Question {
         return questions[currentQuestionIndex]
+    }
+    
+    func isQuestionSkippable() -> Bool {
+        return areQuestionSkipable
     }
     
     func computeSummary() -> Summary {
@@ -39,17 +44,19 @@ class Quiz {
     }
     
     func loadNextQuestion(isSkippingAllowed: Bool) -> NextQuestionResult {
-        if getCurrentQuestion().choices.type.canProceed() {
-            if lastQuestion() {
-                moveToNextQuestion()
-                return .yes
-            }
+        let currentQuestion = getCurrentQuestion()
+        if lastQuestion() {
             return .end
         }
-        if isSkippingAllowed && lastQuestion() {
+        if currentQuestion.choices.type.canProceed() {
             moveToNextQuestion()
+            return .yes
+        } else if isSkippingAllowed {
+            moveToNextQuestion()
+            return .notAnswered
+        } else {
+            return .notAnswered
         }
-        return .notAnswered
     }
     
     private func moveToNextQuestion() {
@@ -57,6 +64,6 @@ class Quiz {
     }
     
     private func lastQuestion() -> Bool {
-        return currentQuestionIndex != questions.count - 1
+        return currentQuestionIndex == questions.count - 1
     }
 }

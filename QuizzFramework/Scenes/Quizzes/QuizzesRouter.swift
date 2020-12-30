@@ -13,6 +13,9 @@ class QuizzesRouter {
     func routeToQuestion(request: QuestionsModels.Request) {
         let questionViewController = QuestionViewController()
         questionViewController.request = request
-        viewController?.navigationController?.pushViewController(questionViewController, animated: true)
+        if viewController?.navigationController?.viewControllers.last == viewController {
+            viewController?.navigationController?.pushViewController(questionViewController,
+                                                                     animated: true)
+        }
     }
 }
