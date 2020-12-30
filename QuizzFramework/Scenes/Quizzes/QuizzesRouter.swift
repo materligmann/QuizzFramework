@@ -13,9 +13,11 @@ class QuizzesRouter {
     func routeToQuestion(request: QuestionsModels.Request) {
         let questionViewController = QuestionViewController()
         questionViewController.request = request
-        if viewController?.navigationController?.viewControllers.last == viewController {
-            viewController?.navigationController?.pushViewController(questionViewController,
-                                                                     animated: true)
+        let questionNavigation = UISystem.getNavigation(rootViewController: questionViewController)
+        if viewController?.navigationController?.presentedViewController == nil {
+            questionViewController.navigationItem.largeTitleDisplayMode = .always
+            questionNavigation.isModalInPresentation = true
+            viewController?.navigationController?.present(questionNavigation, animated: true)
         }
     }
 }

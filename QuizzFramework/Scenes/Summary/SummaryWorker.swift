@@ -27,7 +27,16 @@ class SummaryWorker {
     func rightnessSection(corrections: [Correction], action: @escaping (_ correction: Correction, String) -> Void ) -> FormModels.FormSection {
         var entries = [FormModels.FormEntry]()
         for (i, correction) in corrections.enumerated() {
-            let imageName = correction.rightness.isRight ? "checkmark.circle" : "xmark.circle"
+            let imageName: String
+            if correction.rightness.isRight {
+                imageName = "checkmark.circle"
+            } else {
+                if correction.rightness.isSelected {
+                    imageName = "xmark.circle"
+                } else {
+                    imageName = "questionmark.circle"
+                }
+            }
             let cellAction = { action(correction, "Question \(i + 1)") }
             let entry = FormModels.FormEntry(entryType:
                                                 .result(FormModels.ResultEntry(

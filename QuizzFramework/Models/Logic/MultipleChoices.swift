@@ -35,7 +35,7 @@ class MultipleChoices {
                               selected: isSelected)
             checks.append(check)
         }
-        rightness = Rightness(checks: checks, isRight: isRight)
+        rightness = Rightness(checks: checks, isRight: isRight, isSelected: answers != nil)
     }
     
     func addAnswer(choice: Choice) {

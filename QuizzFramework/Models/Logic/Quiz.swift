@@ -46,6 +46,12 @@ class Quiz {
     func loadNextQuestion(isSkippingAllowed: Bool) -> NextQuestionResult {
         let currentQuestion = getCurrentQuestion()
         if lastQuestion() {
+            if !currentQuestion.choices.type.canProceed() && isSkippingAllowed {
+                return .end
+            }
+            if !currentQuestion.choices.type.canProceed() && !isSkippingAllowed {
+                return .notAnswered
+            }
             return .end
         }
         if currentQuestion.choices.type.canProceed() {

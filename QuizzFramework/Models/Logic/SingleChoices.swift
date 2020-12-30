@@ -25,7 +25,7 @@ class SingleChoices {
         for choice in aggregatedShuffledChoices {
             checks.append(Check(choice: choice, isCorrect: false, selected: false))
         }
-        rightness = Rightness(checks: checks, isRight: false)
+        rightness = Rightness(checks: checks, isRight: false, isSelected: false)
     }
     
     func setAnswer(choice: Choice) {
@@ -51,7 +51,7 @@ class SingleChoices {
             let check = Check(choice: choice, isCorrect: isCorrect, selected: isSelected)
             checks.append(check)
         }
-        rightness = Rightness(checks: checks, isRight: isRight)
+        rightness = Rightness(checks: checks, isRight: isRight, isSelected: answer != nil)
     }
 }
 

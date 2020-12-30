@@ -10,6 +10,7 @@ import Foundation
 struct Rightness: Equatable {
     let checks : [Check]
     let isRight: Bool
+    let isSelected: Bool
 }
 
 struct Check: Equatable {
