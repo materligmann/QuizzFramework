@@ -12,6 +12,7 @@ enum QuestionsModels {
         let mode: QuestionMode
         let title: String
         let isSkippable: Bool
+        let onCompletion: (() -> Void)?
     }
     
     enum QuestionMode {

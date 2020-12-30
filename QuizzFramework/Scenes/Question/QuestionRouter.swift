@@ -27,4 +27,8 @@ class QuestionRouter {
                                                                      animated: true)
         }
     }
+    
+    func routeToPrevious(completion: @escaping () -> Void) {
+        viewController?.navigationController?.popViewController(animated: true, completion: completion)
+    }
 }

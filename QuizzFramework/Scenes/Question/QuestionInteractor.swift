@@ -59,6 +59,12 @@ class QuestionInteractor {
         }
     }
     
+    func loadPrevious() {
+        if let completion = request?.onCompletion {
+            presenter.presentPrevious(completion: completion)
+        }
+    }
+    
     func onQuestionEnd() {
         if let question = question {
             switch question.choices.type {
@@ -77,7 +83,8 @@ class QuestionInteractor {
             case .yes:
                 loadNextQuestion(quiz: quiz)
             case .end:
-                presenter.presentSummary(request: SummaryModels.Request(quizz: quiz))
+                let request = SummaryModels.Request(quizz: quiz)
+                presenter.presentSummary(request: request)
             case .notAnswered:
                 if isSkippable {
                     loadNextQuestion(quiz: quiz)
@@ -95,7 +102,8 @@ class QuestionInteractor {
         let number = quiz.getCurrentQuestionIndex() + 1
         let request = QuestionsModels.Request(mode: .question(question),
                                               title: "Question \(number)",
-                                              isSkippable: quiz.isQuestionSkippable())
+                                              isSkippable: quiz.isQuestionSkippable(),
+                                              onCompletion: nil)
         presenter.presentNextQuestion(request: request)
     }
     

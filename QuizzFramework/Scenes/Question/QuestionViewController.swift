@@ -24,6 +24,9 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         setup()
         configureBackground()
+        if request?.onCompletion != nil {
+            configureBackButton()
+        }
         configureQuestionTableView()
         
         interactor.loadQuestion()
@@ -38,6 +41,15 @@ class QuestionViewController: UIViewController {
     }
     
     // MARK: Configure
+    
+    private func configureBackButton() {
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back",
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(backButtonWasPressed))
+        self.navigationItem.leftBarButtonItem = newBackButton
+    }
     
     private func configureBackground() {
         view.backgroundColor = .primaryColor
@@ -64,7 +76,17 @@ class QuestionViewController: UIViewController {
         questionTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
     }
     
+    // MARK: User Action
+    
+    @objc private func backButtonWasPressed() {
+        interactor.loadPrevious()
+    }
+    
     // MARK: Navigate
+    
+    func navigateToPrevious(completion: @escaping () -> Void) {
+        router.routeToPrevious(completion: completion)
+    }
     
     func navigateToNextQuestion(request: QuestionsModels.Request) {
         router.routeToNextQuestion(request: request)

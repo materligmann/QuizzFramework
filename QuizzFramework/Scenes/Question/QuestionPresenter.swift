@@ -41,4 +41,8 @@ class QuestionPresenter {
     func presentMessage(message: Message) {
         viewController?.displayMessage(message: message)
     }
+    
+    func presentPrevious(completion: @escaping () -> Void) {
+        viewController?.navigateToPrevious(completion: completion)
+    }
 }

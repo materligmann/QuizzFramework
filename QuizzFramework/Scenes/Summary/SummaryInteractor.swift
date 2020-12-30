@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import StoreKit
 
 class SummaryInteractor {
     
@@ -24,7 +25,18 @@ class SummaryInteractor {
     }
     
     func loadQuestionDetail(correction: Correction, title: String) {
-        let request = QuestionsModels.Request(mode: .correction(correction), title: title, isSkippable: false)
+        let request = QuestionsModels.Request(mode: .correction(correction), title: title, isSkippable: false, onCompletion: requestReview)
         presenter.presentCorrection(request: request)
+    }
+    
+    func requestReview() {
+        var count = UserDefaults.standard.integer(forKey: "reviewCount")
+        count += 1
+        UserDefaults.standard.set(count, forKey: "reviewCount")
+        if count < 1 {
+            if let scene = UIApplication.shared.windows.first?.windowScene {
+                SKStoreReviewController.requestReview(in: scene)
+            }
+        }
     }
 }
