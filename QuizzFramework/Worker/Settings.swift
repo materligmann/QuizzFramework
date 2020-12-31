@@ -9,4 +9,5 @@ import Foundation
 
 struct Settings {
     static let areQuestionsSkippable = true
+    static let addQuizz = false
 }

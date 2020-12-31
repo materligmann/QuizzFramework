@@ -27,6 +27,7 @@ class QuestionViewController: UIViewController {
         if request?.onCompletion != nil {
             configureBackButton()
         }
+        self.view.addSubview(UIView(frame: .zero))
         configureQuestionTableView()
         
         interactor.loadQuestion()

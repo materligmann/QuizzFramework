@@ -5,7 +5,7 @@
 //  Created by Mathias Erligmann on 25/12/2020.
 //
 
-import Foundation
+import UIKit
 
 class CategoriesRouter {
     weak var viewController: CategoriesViewController?
@@ -16,6 +16,13 @@ class CategoriesRouter {
         if viewController?.navigationController?.viewControllers.last == viewController {
             viewController?.navigationController?.pushViewController(quizzesViewController,
                                                                      animated: true)
+        }
+    }
+    
+    func routeToNewQuiz() {
+        let newQuizViewController = UIViewController()
+        if viewController?.navigationController?.viewControllers.last == viewController {
+            viewController?.present(newQuizViewController, animated: true)
         }
     }
 }

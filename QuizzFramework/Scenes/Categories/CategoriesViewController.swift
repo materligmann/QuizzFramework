@@ -10,6 +10,7 @@ import UIKit
 class CategoriesViewController: UIViewController {
     
     private let mainTableView = UITableView(frame: .zero, style: .insetGrouped)
+    private let newQuizButton = UIBarButtonItem()
     
     var request: CategoriesModels.Request?
     
@@ -26,6 +27,11 @@ class CategoriesViewController: UIViewController {
         configureBackground()
         configureTitle()
         configureSummaryTableView()
+        configureNewQuizzButton()
+        
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         
         interactor.loadCategories()
     }
@@ -66,6 +72,22 @@ class CategoriesViewController: UIViewController {
         mainTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
         mainTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         mainTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+    }
+    
+    private func configureNewQuizzButton() {
+        newQuizButton.title = "new"
+        newQuizButton.target = self
+        newQuizButton.action = #selector(newQuizButtonWasPressed)
+        navigationItem.setRightBarButton(newQuizButton, animated: false)
+    }
+    
+    
+    // MARK: User Action
+    
+    @objc func newQuizButtonWasPressed() {
+        if Settings.addQuizz {
+            router.routeToNewQuiz()
+        }
     }
     
     // MARK: Navigate

@@ -15,8 +15,6 @@ class QuizzesRouter {
         questionViewController.request = request
         let questionNavigation = UISystem.getNavigation(rootViewController: questionViewController)
         if viewController?.navigationController?.presentedViewController == nil {
-            questionViewController.navigationItem.largeTitleDisplayMode = .always
-            questionNavigation.isModalInPresentation = true
             viewController?.navigationController?.present(questionNavigation, animated: true)
         }
     }
