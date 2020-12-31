@@ -27,11 +27,9 @@ class CategoriesViewController: UIViewController {
         configureBackground()
         configureTitle()
         configureSummaryTableView()
-        configureNewQuizzButton()
-        
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
+        if Settings.addQuizz {
+            configureNewQuizzButton()
+        }
         
         interactor.loadCategories()
     }
@@ -85,9 +83,7 @@ class CategoriesViewController: UIViewController {
     // MARK: User Action
     
     @objc func newQuizButtonWasPressed() {
-        if Settings.addQuizz {
-            router.routeToNewQuiz()
-        }
+        router.routeToNewQuiz()
     }
     
     // MARK: Navigate
